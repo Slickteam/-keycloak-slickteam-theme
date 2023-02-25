@@ -30,7 +30,7 @@ services:
       - postgres
     expose:
       - "8080"
-    command: start-dev
+    command: start-dev --spi-theme-static-max-age=-1 --spi-theme-cache-themes=false --spi-theme-cache-templates=false
     labels:
       traefik.enable: "true"
       traefik.http.routers.keycloak.entrypoints: web
@@ -52,6 +52,8 @@ services:
       SONAR_JDBC_URL: jdbc:postgresql://postgres:5432/sonar
       SONAR_JDBC_USERNAME: sonar
       SONAR_JDBC_PASSWORD: sonar123
+    depends_on:
+      - postgres
     volumes:
       - sonar_extensions:/opt/sonarqube/extensions
       - sonar_logs:/opt/sonarqube/logs
