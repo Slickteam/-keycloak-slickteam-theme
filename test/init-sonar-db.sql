@@ -1,2 +1,0 @@
-CREATE USER sonar WITH PASSWORD 'sonar123';
-CREATE DATABASE sonar OWNER sonar;

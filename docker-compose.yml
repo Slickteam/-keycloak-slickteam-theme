@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:15.2
+    image: postgres:15.3
     container_name: postgres
     environment:
       POSTGRES_PASSWORD: postgres
@@ -13,7 +13,7 @@ services:
     networks:
       - keycloak
   keycloak:
-    image: quay.io/keycloak/keycloak:21.0.0
+    image: quay.io/keycloak/keycloak:21.1.1
     container_name: keycloak
     environment:
       KEYCLOAK_ADMIN: admin
@@ -27,7 +27,7 @@ services:
       KC_HOSTNAME_ADMIN: keycloak.localhost
       KC_HTTP_ENABLED: true
     volumes:
-      - "$PWD/themes/slickteam:/opt/keycloak/themes/slickteam"
+      - "./themes/slickteam:/opt/keycloak/themes/slickteam"
     depends_on:
       - postgres
     expose:
@@ -44,41 +44,16 @@ services:
       keycloak:
         aliases:
           - keycloak.localhost
-  # sonar:
-  #   image: "sonarqube:9.9.0-community"
-  #   container_name: sonar
-  #   restart: unless-stopped
-  #   expose:
-  #     - "9000"
-  #   environment:
-  #     SONAR_JDBC_URL: jdbc:postgresql://postgres:5432/sonar
-  #     SONAR_JDBC_USERNAME: sonar
-  #     SONAR_JDBC_PASSWORD: sonar123
-  #   depends_on:
-  #     - postgres
-  #   volumes:
-  #     - sonar_extensions:/opt/sonarqube/extensions
-  #     - sonar_logs:/opt/sonarqube/logs
-  #     - sonar_data:/opt/sonarqube/data
-  #   labels:
-  #     traefik.enable: "true"
-  #     traefik.http.routers.sonar.entrypoints: web
-  #     traefik.http.routers.sonar.tls: "false"
-  #     traefik.http.routers.sonar.service: sonar
-  #     traefik.http.services.sonar.loadbalancer.server.port: 9000
-  #     traefik.http.routers.sonar.rule: Host(`sonar.localhost`)
-  #   networks:
-  #     - keycloak
   traefik:
     container_name: traefik
-    image: traefik:v2.9.8
+    image: traefik:v2.10.1
     hostname: "traefik"
     environment:
       TZ: Europe/Paris
     ports:
       - "80:80"
     volumes:
-      - "$PWD/test/traefik.yaml:/etc/traefik/traefik.yml:ro"
+      - "./test/traefik.yaml:/etc/traefik/traefik.yml:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
     labels:
       traefik.enable: "true"
@@ -93,9 +68,6 @@ services:
 
 volumes:
   postgres-data:
-  # sonar_extensions:
-  # sonar_logs:
-  # sonar_data:
 
 networks:
   keycloak:
