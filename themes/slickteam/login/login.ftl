@@ -3,8 +3,6 @@
     <#if section = "title">
         ${msg("loginTitle",(realm.displayName!''))}
     <#elseif section = "header">
-        <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet"/>
-        <link href="${url.resourcesPath}/img/favicon.png" rel="icon"/>
         <script>
             function togglePassword() {
                 var x = document.getElementById("password");
