@@ -19,42 +19,38 @@
             }
         </script>
     <#elseif section = "form">
-        <div>
-            <img class="logo" src="${url.resourcesPath}/img/slickteam.png" alt="Slickteam logo">
+        <div class="card-header">
+            <img class="logo" src="${url.resourcesPath}/img/logo_slickteam_white.svg" alt="Slickteam logo">
         </div>
-        <div class="box-container">
-            <!--<div>
-                <p class="application-name">Custom Identity Service</p>
-            </div>-->
+        <div class="card-content">
         <#if realm.password>
-            <div>
-              <form id="kc-form-login" class="form" onsubmit="return true;" action="${url.loginAction}" method="post">
-                    <input id="username" class="login-field" placeholder="${msg("username")}" type="text" name="username" tabindex="1">
-                    <div>
-                        <label class="visibility" id="v" onclick="togglePassword()"><img id="vi" src="${url.resourcesPath}/img/eye-off.png"></label>
-                    </div>
-                <input id="password" class="login-field" placeholder="${msg("password")}" type="password" name="password" tabindex="2">
-                <input class="submit" type="submit" value="${msg("doLogIn")}" tabindex="3">
-				<div>
-					<p class="copyright">&copy; ${msg("copyright", "${.now?string('yyyy')}")}</p>
-				</div>
-                </form>
-            </div>
+            <form id="kc-form-login" onsubmit="return true;" action="${url.loginAction}" method="post">
+                <input class="input-text input-text-ma0" id="username" class="login-field" placeholder="${msg("username")}" type="text" name="username" tabindex="1">
+                <label class="visibility" id="v" onclick="togglePassword()"><img id="vi" src="${url.resourcesPath}/img/eye-off.png"></label>
+                <input class="input-text" id="password" class="login-field" placeholder="${msg("password")}" type="password" name="password" tabindex="2">
+                <input class="input-button" type="submit" value="${msg("doLogIn")}" tabindex="3">
+            </form>
         </#if>
         <#if social.providers??>
-			<div class="alternate-wrapper">
-				<span spacing="16" class="separator"></span>
-				<div class="login-alternate-spacer"></div>
-				<span data-cy="text" font-size="16px" font-weight="400" class="login-alternate">or</span>
-				<div class="login-alternate-spacer"></div>
-				<span spacing="16" class="separator"></span>
-			</div>
-            <!--<p class="para">${msg("socialLoginAlternate")}</p>-->
-            <div id="social-providers">
-                <#list social.providers as p>
-                <input class="social-link-style" type="button" onclick="location.href='${p.loginUrl}';" value="${p.displayName}"/>
-                </#list>
+            <#list social.providers as p>
+            <input class="input-button-other social-link-style" type="button" onclick="location.href='${p.loginUrl}';" value="${p.displayName}"/>
+            </#list>
+        </#if>
+        <#if realm.rememberMe && !usernameEditDisabled??>
+            <div class="remember-me">
+                <label>
+                    <#if login.rememberMe??>
+                        <input tabindex="3" id="rememberMe" name="rememberMe" type="checkbox" tabindex="3" checked> ${msg("rememberMe")}
+                    <#else>
+                        <input tabindex="3" id="rememberMe" name="rememberMe" type="checkbox" tabindex="3"> ${msg("rememberMe")}
+                    </#if>
+                </label>
             </div>
+        </#if>
+        <#if realm.resetPasswordAllowed>
+        <div class="forgot-password">
+            <a tabindex="5" href="${url.loginResetCredentialsUrl}">${msg("doForgotPassword")}</a>
+        </div>
         </#if>
     </#if>
 </@layout.registrationLayout>
