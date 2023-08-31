@@ -629,7 +629,7 @@ ul#kc-totp-supported-apps {
     padding: 48px;
 }
 .card-content .input-text {
-    width: 349px;
+    width: 100%;
     height: 40px;
     margin: 0 0 20px 0;
     padding: 4px 0;
@@ -645,7 +645,7 @@ ul#kc-totp-supported-apps {
     border: 1px solid #F18700;
 }
 .card-content .input-button {
-    width: 352px;
+    width: 100%;
     background-color: #F18700;
     color: white;
     height: 48px;
@@ -656,7 +656,7 @@ ul#kc-totp-supported-apps {
     font-size: 16px;
 }
 .input-button-other {
-    width: 352px;
+    width: 100%;
     background-color: #fff;
     border: 1px solid #F18700;
     margin: 0 0 2px 0;
@@ -668,6 +668,7 @@ ul#kc-totp-supported-apps {
     display: inline-block;
     font-size: 16px;
     line-height: 46px;
+    cursor: pointer;
 }
 .visibility {
     position: relative;
@@ -708,4 +709,32 @@ ul#kc-totp-supported-apps {
     text-decoration: none;
     color: #F18700;
     font-size: 16px;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 450px) {
+    .container {
+        width: 100%;
+        margin: 0 auto 0 auto;
+    }
+    .card-content {
+        padding: 16px;
+    }
+    .card-content .input-text {
+        margin: 0 0 8px 0;
+    }
+    .card-content .input-button {
+        height: 48px;
+        margin: 0 0 8px 0;
+    }
+    .visibility {
+        left: 88%;
+    }
+    .remember-me {
+        margin: 8px 0 0 0;
+    }
+    .forgot-password {
+        margin: 8px 0 0 0;
+    }
 }
