@@ -1,7 +1,7 @@
+name: keycloak-slickteam-theme
 services:
   postgres:
-    image: postgres:15.3
-    container_name: postgres
+    image: postgres:16.1
     environment:
       POSTGRES_PASSWORD: postgres
     expose:
@@ -10,11 +10,11 @@ services:
       - "127.0.0.1:5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
+      - ./.postgres/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
     networks:
-      - keycloak
+      - keycloak-slickteam
   keycloak:
-    image: quay.io/keycloak/keycloak:22.0.1
-    container_name: keycloak
+    image: quay.io/keycloak/keycloak:23.0.4
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin123
@@ -41,19 +41,18 @@ services:
       traefik.http.services.keycloak.loadbalancer.server.port: 8080
       traefik.http.routers.keycloak.rule: Host(`keycloak.localhost`)
     networks:
-      keycloak:
+      keycloak-slickteam:
         aliases:
           - keycloak.localhost
   traefik:
-    container_name: traefik
-    image: traefik:v2.10.4
+    image: traefik:v2.10.7
     hostname: "traefik"
     environment:
       TZ: Europe/Paris
     ports:
       - "80:80"
     volumes:
-      - "./test/traefik.yaml:/etc/traefik/traefik.yml:ro"
+      - "./.traefik/traefik.yml:/etc/traefik/traefik.yml:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
     labels:
       traefik.enable: "true"
@@ -64,11 +63,10 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
-      - keycloak
+      - keycloak-slickteam
 
 volumes:
   postgres-data:
 
 networks:
-  keycloak:
-    name: keycloak-test
+  keycloak-slickteam:

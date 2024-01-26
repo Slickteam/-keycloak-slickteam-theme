@@ -1,6 +1,6 @@
-<#macro registrationLayout bodyClass="" displayInfo=false displayMessage=true>
+<#macro registrationLayout bodyClass="" displayInfo=false displayMessage=false>
 <!doctype html>
-<html lang="fr">
+<html lang="fr" class="w-full h-full">
 
 <head>
     <meta charset="utf-8">
@@ -17,23 +17,34 @@
     </#if>
 </head>
 
-	<body>
-    <#nested "header">
-    <div class="container">
-        <h2 class="title-page">Slick<strong>team</strong><br>Authentification Service</h2>
-        <div class="card">
-    <#if displayMessage && message?has_content>
-    <div class="alert alert-${message.type}">
-        <#if message.type = 'success'><span class="${properties.kcFeedbackSuccessIcon!}"></span></#if>
-        <#if message.type = 'warning'><span class="${properties.kcFeedbackWarningIcon!}"></span></#if>
-        <#if message.type = 'error'><span class="${properties.kcFeedbackErrorIcon!}"></span></#if>
-        <#if message.type = 'info'><span class="${properties.kcFeedbackInfoIcon!}"></span></#if>
-        <span class="message-text">${message.summary?no_esc}</span>
-    </div>
-    </#if>
-    <#nested "form">
+<body class="w-full h-full" style="overflow: unset;">
+    <div class="overflow-auto h-[inherit]">
+        <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
+            <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+                <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12 flex flex-col justify-center">
+                    <div>
+                        <div class="my-4">
+                            <img src="${url.resourcesPath}/img/favicon.png"
+                                class="w-32 mx-auto" alt="Logo Slickteam" />
+                        </div>
+                        <#if displayMessage && message?has_content>
+                        <div class="alert alert-${message.type}">
+                            <#if message.type = 'success'><span class="${properties.kcFeedbackSuccessIcon!}"></span></#if>
+                            <#if message.type = 'warning'><span class="${properties.kcFeedbackWarningIcon!}"></span></#if>
+                            <#if message.type = 'error'><span class="${properties.kcFeedbackErrorIcon!}"></span></#if>
+                            <#if message.type = 'info'><span class="${properties.kcFeedbackInfoIcon!}"></span></#if>
+                            <span class="message-text">${message.summary?no_esc}</span>
+                        </div>
+                        </#if>
+                        <#nested "form">
+                    </div>
+                </div>
+                <div class="flex-1 bg-primary-100 text-center hidden lg:flex">
+                    <#nested "imageRight">
+                </div>
+            </div>
         </div>
     </div>
-	</body>
+</body>
 </html>
 </#macro>

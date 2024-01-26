@@ -2,8 +2,12 @@
   "name": "keycloak-slickteam-theme",
   "version": "1.0.0",
   "scripts": {
-    "env:start": "docker compose -f docker-compose.yml up -d",
-    "env:stop": "docker compose -f docker-compose.yml down",
-    "attach:psql": "docker exec -it -u postgres postgres psql"
+    "env:start": "docker compose up -d",
+    "env:stop": "docker compose down",
+    "attach:psql": "docker exec -it -u postgres postgres psql",
+    "update:css": "npx tailwindcss -i ./style.css -o ./themes/slickteam/common/resources/css/index.css -c ./tailwind.config.js --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
   }
 }

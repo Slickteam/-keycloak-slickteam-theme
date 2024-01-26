@@ -1,3 +1,0 @@
-# Theme keycloak
-
-> TODO:
