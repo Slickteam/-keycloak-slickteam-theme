@@ -21,11 +21,13 @@
     <div class="overflow-auto h-[inherit]">
         <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
             <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+                <div class="flex-1 bg-primary-100 text-center hidden lg:flex">
+                    <#nested "imageRight">
+                </div>
                 <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12 flex flex-col justify-center">
                     <div>
                         <div class="my-4">
-                            <img src="${url.resourcesPath}/img/favicon.png"
-                                class="w-32 mx-auto" alt="Logo Slickteam" />
+                            <img src="${url.resourcesPath}/img/favicon.png" class="w-32 mx-auto" alt="Logo Slickteam" />
                         </div>
                         <#if displayMessage && message?has_content>
                         <div class="alert alert-${message.type}">
@@ -38,9 +40,6 @@
                         </#if>
                         <#nested "form">
                     </div>
-                </div>
-                <div class="flex-1 bg-primary-100 text-center hidden lg:flex">
-                    <#nested "imageRight">
                 </div>
             </div>
         </div>

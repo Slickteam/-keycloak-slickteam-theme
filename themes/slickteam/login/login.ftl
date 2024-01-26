@@ -8,6 +8,29 @@
                 <h1 class="text-2xl xl:text-3xl text-center font-extrabold my-4">
                     ${msg("authenticate")}
                 </h1>
+                <#if social.providers??>
+                    <div class="flex flex-col items-center">
+                    <#list social.providers as p>
+                        <button
+                            onclick="location.href='${p.loginUrl}';"
+                            class="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-primary-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+                            <div class="bg-white p-2 rounded-full">
+                                <img src="${url.resourcesPath}/img/${p.displayName}_logo.svg" class="w-4 mx-auto" alt="Logo Slickteam" />
+                            </div>
+                            <span class="ml-4">
+                                ${msg("textSignTP")} ${p.displayName}
+                            </span>
+                        </button>
+                    </#list>
+                    </div>
+                    <div class="my-12 border-b text-center">
+                        <div
+                            class="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
+                            ${msg("textSignInEmail")}
+                        </div>
+                    </div>
+                </#if>
+
                 <form id="slickteam-form-login" onsubmit="return true;" action="${url.loginAction}" method="post">
                     <input
                         class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
