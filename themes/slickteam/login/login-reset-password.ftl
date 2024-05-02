@@ -1,7 +1,7 @@
 <#import "template.ftl" as layout>
 <@layout.registrationLayout displayInfo=social.displayInfo; section>
     <#if section = "title">
-        ${msg("emailForgotTitle",(realm.displayName!''))}
+        ${msg("emailForgotTitle",(realm.displayName!''))} | Slickteam
     <#elseif section = "form">
     <div class="mx-auto max-w-xs">
         <form onsubmit="return true;" action="${url.loginAction}" method="post">

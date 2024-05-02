@@ -27,7 +27,7 @@
                 <div class="lg:w-1/2 xl:w-5/12 p-6 sm:p-12 flex flex-col justify-center">
                     <div>
                         <div class="my-4">
-                            <img src="${url.resourcesPath}/img/favicon.png" class="w-32 mx-auto" alt="Logo Slickteam" />
+                            <img src="${url.resourcesPath}/img/slickteam_logo.jpg" class="w-6/12 mx-auto" alt="Logo Slickteam" />
                         </div>
                         <#nested "form">
                         <#if message?has_content>
