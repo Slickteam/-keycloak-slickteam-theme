@@ -8,6 +8,6 @@
     "update:css": "npx tailwindcss -i ./style.css -o ./themes/slickteam/common/resources/css/index.css -c ./tailwind.config.js --minify"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.3"
   }
 }

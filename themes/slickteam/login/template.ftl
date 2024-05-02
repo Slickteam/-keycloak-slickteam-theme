@@ -17,10 +17,10 @@
     </#if>
 </head>
 
-<body class="w-full h-full" style="overflow: unset;">
-    <div class="overflow-auto h-[inherit]">
+<body class="w-full h-full" style="overflow: unset; touch-action: none;">
+    <div class="h-[inherit]">
         <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-            <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+            <div class="m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
                 <div class="flex-1 bg-primary-100 text-center hidden lg:flex">
                     <#nested "imageRight">
                 </div>
@@ -29,16 +29,19 @@
                         <div class="my-4">
                             <img src="${url.resourcesPath}/img/favicon.png" class="w-32 mx-auto" alt="Logo Slickteam" />
                         </div>
-                        <#if displayMessage && message?has_content>
-                        <div class="alert alert-${message.type}">
-                            <#if message.type = 'success'><span class="${properties.kcFeedbackSuccessIcon!}"></span></#if>
-                            <#if message.type = 'warning'><span class="${properties.kcFeedbackWarningIcon!}"></span></#if>
-                            <#if message.type = 'error'><span class="${properties.kcFeedbackErrorIcon!}"></span></#if>
-                            <#if message.type = 'info'><span class="${properties.kcFeedbackInfoIcon!}"></span></#if>
-                            <span class="message-text">${message.summary?no_esc}</span>
-                        </div>
-                        </#if>
                         <#nested "form">
+                        <#if message?has_content>
+                            <#if message.type = 'success'>
+                                <div class="rounded-md bg-green-50 mt-4 p-4 text-sm text-green-500">
+                            <#elseif message.type = 'warning'>
+                                <div class="rounded-md bg-yellow-50 mt-4 p-4 text-sm text-yellow-500">
+                            <#elseif message.type = 'error'>
+                                <div class="rounded-md bg-red-50 mt-4 p-4 text-sm text-red-500">
+                            <#else>
+                                <div class="rounded-md bg-blue-50 mt-4 p-4 text-sm text-blue-500">
+                            </#if>
+                            ${message.summary?no_esc}</div>
+                        </#if>
                     </div>
                 </div>
             </div>
