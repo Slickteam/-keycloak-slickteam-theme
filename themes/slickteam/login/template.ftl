@@ -30,18 +30,6 @@
                             <img src="${url.resourcesPath}/img/slickteam_logo.jpg" class="w-6/12 mx-auto" alt="Logo Slickteam" />
                         </div>
                         <#nested "form">
-                        <#if message?has_content>
-                            <#if message.type = 'success'>
-                                <div class="rounded-md bg-green-50 mt-4 p-4 text-sm text-green-500">
-                            <#elseif message.type = 'warning'>
-                                <div class="rounded-md bg-yellow-50 mt-4 p-4 text-sm text-yellow-500">
-                            <#elseif message.type = 'error'>
-                                <div class="rounded-md bg-red-50 mt-4 p-4 text-sm text-red-500">
-                            <#else>
-                                <div class="rounded-md bg-blue-50 mt-4 p-4 text-sm text-blue-500">
-                            </#if>
-                            ${message.summary?no_esc}</div>
-                        </#if>
                     </div>
                 </div>
             </div>
